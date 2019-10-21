@@ -1,0 +1,2 @@
+org.springframework.boot.env.PropertySourceLoader=\
+cn.yxffcode.springboot.configuration.groovy.GroovyPropertySourceLoader
