@@ -9,6 +9,9 @@
 * 可使用非string类型的配置，可使用复杂对象作为配置的值，但是需要使用@JValue做注入
 
 ## Groovy配置
+实现代码见GroovyPropertySourceLoader类和spring.factories配置
+
+
 创建application.groovy或者application-xxx.groovy，配置中使用map表示kv对，
 可以认为map则仅仅用于分组，是对可读性的增强，map中的key与properties文件
 中的key完全相同，意义也一样，内容类似如下：
@@ -59,6 +62,9 @@ def configs = [
 ```
 
 ## 使用@JValue注入属性值
+
+实现代码见JValueInjectBeanPostProcessor类和ConfigResolverEnvironmentPostProcessor类
+
 既然支持了groovy配置，而groovy是代码，具有很大的灵活性，我们不必非要使用String，groovy可支持任意的对象，
 那么我提供了@JValue注解，用于对属性做Java对象值的注入，而被注入的对象则来源于groovy配置，例如在groovy中有如下配置：
 
@@ -111,6 +117,8 @@ public class MybatisConfig {
 ```
 
 ## @Bean的初步支持
+具体代码见GroovyConfigBeanDefinitionRegistryPostProcessor类
+
 可在groovy配置中加入标有@Bean的方法，会将此bean作为一个单例对象注册到spring中，
 但是此处的bean只支持简单的注册，不支持复杂的创建，这里的bean只能依赖groovy配置
 中的内容，不能依赖工程中的bean，当前的实现中不支持，groovy在这里的定位只是属性配置，
